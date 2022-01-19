@@ -1,24 +1,40 @@
 <template>
-  <h1> {{msg}} </h1>
+  <div id="app">
+  </div>
 </template>
 
 <script>
+import * as monaco from "monaco-editor";
+
 export default {
-  name: 'App',
-  data(){
-    return {
-      msg: "Dune > Star Wars"
-    }
+  name: "App",
+  mounted() {
+    monaco.editor.create(document.getElementById("app"), {
+      value: [
+        "function x() {",
+        '\tconsole.log("Hello world!");',
+        "}"].join(
+        "\n"
+      ),
+      language: "javascript",
+      theme: 'vs-dark',
+      automaticLayout: true
+    });
   }
-}
+};
 </script>
 
 <style>
+html, body{
+  margin: 0;
+  padding: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-  font-size: 2cm;
+  height: 100vh;
+  width: 1000px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 </style>
