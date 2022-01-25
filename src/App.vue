@@ -1,31 +1,52 @@
 <template>
-  <div id="app">
-  </div>
+  <div id="app"></div>
 </template>
 
 <script>
-import * as monaco from "monaco-editor";
+//import { setDiagnosticsOptions } from "monaco-yaml";
+import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
+const value = `
+number: 0xfe
+boolean: true
+`;
 
 export default {
-  name: "App",
   mounted() {
-    monaco.editor.create(document.getElementById("app"), {
-      value: [
-        "function x() {",
-        '\tconsole.log("Hello world!");',
-        "}"].join(
-        "\n"
-      ),
-      language: "javascript",
-      theme: 'vs-dark',
-      automaticLayout: true
+    monaco.languages.yaml.yamlDefaults.setDiagnosticsOptions({
+      enableSchemaRequest: true,
+      hover: true,
+      completion: true,
+      validate: true,
+      format: true,
+      schemas: [
+      {
+        fileMatch: ['*'],
+        uri: 'my-schema.json',
+        schema: {
+          type: 'object',
+          properties: {
+            number: {
+              description: 'number property',
+              type: 'number',
+            },
+          },
+        },
+      },
+    ],
     });
-  }
+    monaco.editor.create(document.getElementById("app"), {
+      value,
+      language: "yaml",
+      theme: "vs-dark",
+      tabSize: 2,
+    });
+  },
 };
 </script>
 
 <style>
-html, body{
+html,
+body {
   margin: 0;
   padding: 0;
 }
