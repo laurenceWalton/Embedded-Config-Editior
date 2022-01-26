@@ -3,7 +3,7 @@
 </template>
 
 <script>
-//import { setDiagnosticsOptions } from "monaco-yaml";
+import { setDiagnosticsOptions } from "monaco-yaml";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 const value = `
 number: 0xfe
@@ -12,27 +12,12 @@ boolean: true
 
 export default {
   mounted() {
-    monaco.languages.yaml.yamlDefaults.setDiagnosticsOptions({
-      enableSchemaRequest: true,
+    setDiagnosticsOptions({
       hover: true,
       completion: true,
       validate: true,
-      format: true,
-      schemas: [
-      {
-        fileMatch: ['*'],
-        uri: 'my-schema.json',
-        schema: {
-          type: 'object',
-          properties: {
-            number: {
-              description: 'number property',
-              type: 'number',
-            },
-          },
-        },
-      },
-    ],
+      format: true,      
+      schemas: [],
     });
     monaco.editor.create(document.getElementById("app"), {
       value,
