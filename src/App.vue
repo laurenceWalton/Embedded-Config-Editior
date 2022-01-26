@@ -6,8 +6,10 @@
 import { setDiagnosticsOptions } from "monaco-yaml";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 const value = `
-number: 0xfe
-boolean: true
+# Correct yaml
+name: John Appleseed
+# Incorrect yaml
+foo: somebody said I should put a colon here: so I did
 `;
 
 export default {
