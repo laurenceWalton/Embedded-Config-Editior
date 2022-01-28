@@ -1,13 +1,17 @@
 <template>
-  <div id="app"></div>
+  <div id="app">
+    <text-reader v-on:load="textFunc($event)"></text-reader>
+  </div>
 </template>
 
 <script>
 import { setDiagnosticsOptions } from "monaco-yaml";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 import { editor, Uri } from "monaco-editor";
-import schemaDefault from './schema.json';
-const value = `
+import schemaDefault from "./schema.json";
+import TextReader from "./TextReader";
+
+const def_value = `
 # Property descriptions are displayed when hovering over properties using your cursor
 property: This property has a JSON schema description
 
@@ -81,15 +85,26 @@ export default {
         {
           uri: "file://./schema.json",
           fileMatch: [String(modelUri)],
-          schema: schemaDefault
+          schema: schemaDefault,
         },
       ],
     });
     monaco.editor.create(document.getElementById("app"), {
       theme: "vs-dark",
       tabSize: 2,
-      model: editor.createModel(value, "yaml", modelUri),
+      model: editor.createModel(def_value, "yaml", modelUri),
     });
+
+  },
+  data: () => ({ text: "" }),
+  components: {
+    TextReader,
+  },
+  methods: {
+    textFunc(e) {
+      const inputString = e;
+      console.log(inputString);
+    },
   },
 };
 </script>
@@ -107,5 +122,18 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
+}
+.text-reader {
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.text-reader input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
 }
 </style>
