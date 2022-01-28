@@ -6,6 +6,7 @@
 import { setDiagnosticsOptions } from "monaco-yaml";
 import * as monaco from "monaco-editor/esm/vs/editor/editor.api.js";
 import { editor, Uri } from "monaco-editor";
+import schemaDefault from './schema.json';
 const value = `
 # Property descriptions are displayed when hovering over properties using your cursor
 property: This property has a JSON schema description
@@ -80,48 +81,7 @@ export default {
         {
           uri: "file://./schema.json",
           fileMatch: [String(modelUri)],
-          schema: {
-            type: "object",
-            properties: {
-              property: {
-                description: "I have a description",
-              },
-              titledProperty: {
-                title: "I have a title",
-                description: "I also have a description",
-              },
-              markdown: {
-                markdownDescription:
-                  "Even **markdown** _descriptions_ `are` ~~not~~ supported!",
-              },
-              enum: {
-                description: "Pick your starter",
-                enum: ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"],
-              },
-              number: {
-                description: "Numbers work!",
-                minimum: 42,
-                maximum: 1337,
-              },
-              boolean: {
-                description: "Are boolean supported?",
-                type: "boolean",
-              },
-              string: {
-                type: "string",
-              },
-              reference: {
-                description: "JSON schemas can be referenced, even recursively",
-                $ref: "#",
-              },
-              array: {
-                description: "It also works in arrays",
-                items: {
-                  $ref: "#",
-                },
-              },
-            },
-          },
+          schema: schemaDefault
         },
       ],
     });
