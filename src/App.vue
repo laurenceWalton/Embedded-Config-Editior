@@ -11,99 +11,99 @@ import { editor, Uri } from "monaco-editor";
 import schemaDefault from "./schema.json";
 import TextReader from "./TextReader";
 
-const def_value = `
-# Property descriptions are displayed when hovering over properties using your cursor
-property: This property has a JSON schema description
+// const def_value = `
+// # OLDProperty descriptions are displayed when hovering over properties using your cursor
+// property: This property has a JSON schema description
 
+// # Titles work too!
+// titledProperty: Titles work too!
 
-# Titles work too!
-titledProperty: Titles work too!
+// # Even markdown descriptions work
+// markdown: hover me to get a markdown based description 😮
 
+// # Enums can be autocompleted by placing the cursor after the colon and pressing Ctrl+Space
+// enum:
 
-# Even markdown descriptions work
-markdown: hover me to get a markdown based description 😮
+// # Of course numbers are supported!
+// number: 12
 
+// # As well as booleans!
+// boolean: true
 
-# Enums can be autocompleted by placing the cursor after the colon and pressing Ctrl+Space
-enum:
+// # And strings
+// string: I am a string
 
+// # This property is using the JSON schema recursively
+// reference:
+//   boolean: Not a boolean
 
-# Of course numbers are supported!
-number: 12
+// # Also works in arrays
+// array:
+//   - string: 12
+//     enum: Mewtwo
+//     reference:
+//       reference:
+//         boolean: true
 
+// # JSON referenses can be clicked for navigation
+// pointer:
+//   $ref: '#/array'
 
-# As well as booleans!
-boolean: true
+// # This anchor can be referenced
+// anchorRef: &anchor can be clicked as well
 
+// # Press control while hovering over the anchor
+// anchorPointer: *anchor
 
-# And strings
-string: I am a string
+// formatting:       Formatting is supported too! Under the hood this is powered by Prettier. Just press Ctrl+Shift+I or right click and press Format to format this document.
 
-
-# This property is using the JSON schema recursively
-reference:
-  boolean: Not a boolean
-
-
-# Also works in arrays
-array:
-  - string: 12
-    enum: Mewtwo
-    reference:
-      reference:
-        boolean: true
-
-
-# JSON referenses can be clicked for navigation
-pointer:
-  $ref: '#/array'
-
-
-# This anchor can be referenced
-anchorRef: &anchor can be clicked as well
-
-
-# Press control while hovering over the anchor
-anchorPointer: *anchor
-
-
-formatting:       Formatting is supported too! Under the hood this is powered by Prettier. Just press Ctrl+Shift+I or right click and press Format to format this document.
-
-
-`.replace(/:$/m, ": ");
+// `.replace(/:$/m, ": ");
 export default {
   mounted() {
-    const modelUri = Uri.parse("file://./schema.json");
-
-    setDiagnosticsOptions({
-      enableSchemaRequest: true,
-      hover: true,
-      completion: true,
-      validate: true,
-      format: true,
-      schemas: [
-        {
-          uri: "file://./schema.json",
-          fileMatch: [String(modelUri)],
-          schema: schemaDefault,
-        },
-      ],
-    });
-    monaco.editor.create(document.getElementById("app"), {
-      theme: "vs-dark",
-      tabSize: 2,
-      model: editor.createModel(def_value, "yaml", modelUri),
-    });
-
+    // const modelUri = Uri.parse("file://./schema.json");
+    //   setDiagnosticsOptions({
+    //     enableSchemaRequest: true,
+    //     hover: true,
+    //     completion: true,
+    //     validate: true,
+    //     format: true,
+    //     schemas: [
+    //       {
+    //         uri: "file://./schema.json",
+    //         fileMatch: [String(modelUri)],
+    //         schema: schemaDefault,
+    //       },
+    //     ],
+    //   });
   },
-  data: () => ({ text: "" }),
   components: {
     TextReader,
   },
   methods: {
     textFunc(e) {
+      const modelUri = Uri.parse("file://./schema.json");
       const inputString = e;
-      console.log(inputString);
+
+      setDiagnosticsOptions({
+        enableSchemaRequest: true,
+        hover: true,
+        completion: true,
+        validate: true,
+        format: true,
+        schemas: [
+          {
+            uri: "file://./schema.json",
+            fileMatch: [String(modelUri)],
+            schema: schemaDefault,
+          },
+        ],
+      });
+
+      monaco.editor.create(document.getElementById("app"), {
+        theme: "vs-dark",
+        tabSize: 2,
+        model: editor.createModel(inputString, "yaml", modelUri),
+      });
     },
   },
 };

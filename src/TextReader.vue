@@ -1,7 +1,7 @@
 <template>
   <label class="text-reader">
-    Load File
-    <input type="file" @change="loadTextFromFile" />
+    Upload File
+  <input type="file" @change="loadTextFromFile" />
   </label>
 </template>
 
