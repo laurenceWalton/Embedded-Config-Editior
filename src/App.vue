@@ -62,9 +62,9 @@ formatting:       Formatting is supported too! Under the hood this is powered by
 `.replace(/:$/m, ": ");
 
 export default {
+  // Create the default editor with def_value and included schema.json file
   mounted() {
-    // Create the default editor with def_value and included schema.json file
-    const modelUri = Uri.parse("file://./schema.json");
+    this.modelUri = Uri.parse("file://./schema.json");
 
     setDiagnosticsOptions({
       enableSchemaRequest: true,
@@ -75,7 +75,7 @@ export default {
       schemas: [
         {
           uri: "file://./schema.json",
-          fileMatch: [String(modelUri)],
+          fileMatch: [String(this.modelUri)],
           schema: schemaDefault,
         },
       ],
@@ -84,7 +84,7 @@ export default {
     this.ed = editor.create(document.getElementById("app"), {
       theme: "vs-dark",
       tabSize: 2,
-      model: editor.createModel(def_value, "yaml", modelUri),
+      model: editor.createModel(def_value, "yaml", this.modelUri),
     });
   },
   components: {
@@ -93,8 +93,10 @@ export default {
   },
   data: function () {
     return {
-      // Editor must be accessible by all methods 
+      // Editor must be accessible by all methods
       ed: null,
+      // URI of the default schema
+      modelUri: null,
     };
   },
 
@@ -103,7 +105,6 @@ export default {
     loadSchema(e) {
       // Converts input string (parsed from input file, see SchemaReader component) to JSON object
       const inputSchema = JSON.parse(e);
-      const modelUri = Uri.parse("file://./schema.json");
       setDiagnosticsOptions({
         enableSchemaRequest: true,
         hover: true,
@@ -113,8 +114,8 @@ export default {
         schemas: [
           {
             uri: "file://./schema.json",
-            fileMatch: [String(modelUri)],
-            schema: inputSchema,
+            fileMatch: [String(this.modelUri)],
+            schema: inputSchema
           },
         ],
       });
@@ -123,7 +124,7 @@ export default {
       const newModel = editor.createModel(
         oldModel.getValue(),
         "yaml",
-        modelUri
+        this.modelUri
       );
       this.ed.setModel(newModel);
       oldModel.dispose();
