@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <text-reader v-on:load="loadText($event)"></text-reader>
-    <schema-reader v-on:load="loadSchema($event)"></schema-reader>
-    <p>Upload a file and JSON schema to change defaults</p>
+    <text-reader v-on:load="loadText($event)" name="Upload File"></text-reader>
+    <text-reader v-on:load="loadSchema($event)" name="Upload Schema"></text-reader>
   </div>
 </template>
 
@@ -11,7 +10,6 @@ import { setDiagnosticsOptions } from "monaco-yaml";
 import { editor, Uri } from "monaco-editor";
 import schemaDefault from "./schema.json";
 import TextReader from "./TextReader";
-import SchemaReader from "./SchemaReader";
 
 const def_value = `
 # OLDProperty descriptions are displayed when hovering over properties using your cursor
@@ -88,8 +86,7 @@ export default {
     });
   },
   components: {
-    TextReader,
-    SchemaReader,
+    TextReader
   },
   data: function () {
     return {
@@ -115,19 +112,11 @@ export default {
           {
             uri: "file://./schema.json",
             fileMatch: [String(this.modelUri)],
+            // Schema is changed here. (creating and swapping out model was unnecessary, thanks @Michael)
             schema: inputSchema
           },
         ],
       });
-      // Model with new schema created and swapped in for old model on the same editor instance
-      const oldModel = this.ed.getModel();
-      const newModel = editor.createModel(
-        oldModel.getValue(),
-        "yaml",
-        this.modelUri
-      );
-      this.ed.setModel(newModel);
-      oldModel.dispose();
     },
     // Called on upload file button
     loadText(e) {
@@ -150,35 +139,9 @@ body {
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   height: 100vh;
-  width: 1000px;
+  width: 100vw;
   margin: 0;
   padding: 0;
   overflow: hidden;
-}
-.text-reader {
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
-}
-.text-reader input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  opacity: 0;
-}
-.schema-reader {
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 8px 12px;
-  cursor: pointer;
-}
-.schema-reader input {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  opacity: 0;
 }
 </style>
