@@ -1,8 +1,10 @@
 <template>
+<div class="parent">
   <label class="text-reader">
     {{ name }}
     <input type="file" @change="loadTextFromFile" />
   </label>
+</div>
 </template>
 
 <script>
@@ -21,7 +23,14 @@ export default {
 </script>
 
 <style scoped>
+.parent {
+    background-color: rgb(78, 75, 75);
+}
 .text-reader {
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  background-color: whitesmoke;
   border: 2px solid black;
   border-radius: 5px;
   padding: 8px 12px;
