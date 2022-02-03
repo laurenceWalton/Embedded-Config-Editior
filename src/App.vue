@@ -137,6 +137,7 @@ body {
   padding: 0;
 }
 #app {
+  background-color: rgb(78, 75, 75);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   height: 100vh;
   width: 100vw;
