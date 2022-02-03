@@ -1,9 +1,9 @@
 # embedded-config-editor
 
 This is a web-based application which incorporates the Monaco Editor (the code editor that powers VS Code)
-into a Vue CLI along with monaco-yaml which provides rich support for the YAML language.
+into a Vue project, along with monaco-yaml which provides rich support for the YAML language.
 
-The vison for this project is to ease the creation and editing process of component configuration for K8s applications and reduce the chance of making configuration mistakes.
+The goal for this project is to ease the creation and editing process of component configuration for K8s applications and reduce the chance of making configuration mistakes.
 
 - Accessible with a browser, no special client side tooling required.
 - Configurable regarding both the source file and schema to mount.
