@@ -4,16 +4,12 @@
     "property": {
       "description": "I have a description"
     },
-    "titledProperty": {
-      "title": "I have a title",
-      "description": "I also have a description"
-    },
     "markdown": {
       "markdownDescription": "Even **markdown** _descriptions_ `are` ~~not~~ supported!"
     },
     "enum": {
-      "description": "Pick your starter",
-      "enum": ["Bulbasaur", "Squirtle", "Charmander", "Pikachu"]
+      "description": "Days of Weekend",
+      "enum": ["Saturday", "Sunday"]
     },
     "number": {
       "description": "Numbers work!",
