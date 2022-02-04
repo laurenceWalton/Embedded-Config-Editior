@@ -26,16 +26,6 @@
     },
     "string": {
       "type": "string"
-    },
-    "reference": {
-      "description": "JSON schemas can be referenced, even recursively",
-      "$ref": "#"
-    },
-    "array": {
-      "description": "It also works in arrays",
-      "items": {
-        "$ref": "#"
-      }
     }
   }
 }

@@ -24,7 +24,7 @@ export default {
 
 <style scoped>
 .parent {
-  background-color: rgb(78, 75, 75);
+  background-color: rgb(39, 34, 34);
 }
 .text-reader {
   margin: 0;
