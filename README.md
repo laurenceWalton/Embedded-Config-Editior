@@ -15,7 +15,7 @@ The goal for this project is to ease the creation and editing process of compone
 npm install
 ```
 
-## Compile and Run locally
+## Compile and run
 ```bash
 npm run serve
 ```
