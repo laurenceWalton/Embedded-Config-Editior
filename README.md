@@ -15,6 +15,11 @@ The goal for this project is to ease the creation and editing process of compone
 npm install
 ```
 
+## Compile and Run locally
+```bash
+npm run serve
+```
+
 ## Build Docker Image and run application in a container
 
 Ensure npm install has been run.
@@ -25,15 +30,3 @@ docker run -it -p 8008:8080 --rm --name test-container-1 test-container
 ```
 
 View application at <http://localhost:8008>.
-
-## Compiles and hot-reloads for development
-
-```bash
-npm run serve
-```
-
-## Compiles and minifies for production
-
-```bash
-npm run build
-```
